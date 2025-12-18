@@ -74,44 +74,6 @@ window.addEventListener('load', () => {
     typeWriter();
 });
 
-// Magnetic text effect on hero
-const hero = document.querySelector('#hero');
-const magneticElements = document.querySelectorAll('#hero h1, #hero p, #hero .cta-button');
-
-hero.addEventListener('mousemove', (e) => {
-    const heroRect = hero.getBoundingClientRect();
-    const mouseX = e.clientX - heroRect.left;
-    const mouseY = e.clientY - heroRect.top;
-    const centerX = heroRect.width / 2;
-    const centerY = heroRect.height / 2;
-
-    const deltaX = mouseX - centerX;
-    const deltaY = mouseY - centerY;
-
-    magneticElements.forEach((el, index) => {
-        const rect = el.getBoundingClientRect();
-        const elCenterX = rect.left + rect.width / 2 - heroRect.left;
-        const elCenterY = rect.top + rect.height / 2 - heroRect.top;
-
-        const elDeltaX = mouseX - elCenterX;
-        const elDeltaY = mouseY - elCenterY;
-
-        const angle = Math.atan2(elDeltaY, elDeltaX) * (180 / Math.PI);
-
-        const strength = 0.05 + index * 0.02;
-        const moveX = deltaX * strength;
-        const moveY = deltaY * strength;
-
-        el.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${angle * 0.1}deg)`;
-    });
-});
-
-hero.addEventListener('mouseleave', () => {
-    magneticElements.forEach(el => {
-        el.style.transform = 'translate(0, 0)';
-    });
-});
-
 // EmailJS integration
 (function() {
     emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
