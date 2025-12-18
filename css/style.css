@@ -84,6 +84,7 @@ nav ul li a:hover {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    gap: 3rem;
 }
 
 .hero-content {
@@ -119,6 +120,100 @@ nav ul li a:hover {
 
 .cta-button:hover {
     background: #ff5252;
+}
+
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    animation: float 3s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Animated rings and glow around profile photo */
+.profile-photo {
+    position: relative;
+}
+
+.profile-photo::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(255,107,107,0.15), rgba(118,75,162,0.15), rgba(102,126,234,0.15), rgba(255,107,107,0.15));
+    filter: blur(12px);
+    opacity: 0.9;
+    z-index: 0;
+    animation: spin 8s linear infinite;
+}
+
+.profile-photo::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(118,75,162,0.12), 0 0 60px rgba(102,126,234,0.06);
+    opacity: 0.6;
+    z-index: 0;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.6 }
+    50% { transform: translate(-50%, -50%) scale(1.03); opacity: 0.9 }
+    100% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.6 }
+}
+
+/* Decorative floating dots */
+.profile-photo .dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #ff6b6b);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 3;
+    animation: floatDot 4s ease-in-out infinite;
+}
+
+.profile-photo .dot.d1 { left: -8%; top: 10%; animation-delay: 0s }
+.profile-photo .dot.d2 { right: -6%; top: 30%; animation-delay: 0.5s }
+.profile-photo .dot.d3 { left: 20%; bottom: -6%; animation-delay: 1s }
+
+@keyframes floatDot {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-10px) }
+    100% { transform: translateY(0) }
+}
+
+/* Responsive adjustments for rings */
+@media (max-width: 768px) {
+    .profile-photo::before { width: 240px; height: 240px; filter: blur(10px); }
+    .profile-photo::after { width: 280px; height: 280px; }
+    .profile-photo .dot { width: 8px; height: 8px }
 }
 
 .hero-bg {
@@ -363,5 +458,13 @@ footer a:hover {
     }
     nav ul {
         display: none; /* Simple hide, could add mobile menu */
+    }
+    #hero {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .profile-photo {
+        width: 200px;
+        height: 200px;
     }
 }
